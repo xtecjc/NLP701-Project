@@ -15,3 +15,7 @@
 7-train-Goldstein_regression_model.ipynb: This notebook trains the transformer-based regression model as described in the project report.
 
 8-NER-extraction.ipynb: This notebook extracts NERs from the subjects and objects in triples.
+
+Exxon.html - A sample network of RDF triples extracted using the triple parsing model
+
+Royce.html - A sample network of RDF triples extracted using the triple parsing model
