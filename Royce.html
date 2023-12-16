@@ -1,0 +1,163 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 2000px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "id": "Royce Global", "label": "Royce Global", "shape": "dot"}, {"color": "#97c2fc", "id": "a 4th generation family - owned company", "label": "a 4th generation family - owned company", "shape": "dot"}, {"color": "#97c2fc", "id": "products", "label": "products", "shape": "dot"}, {"color": "#97c2fc", "id": "a leading supplier of colorants for the Textile Industry", "label": "a leading supplier of colorants for the Textile Industry", "shape": "dot"}, {"color": "#97c2fc", "id": "a leading supplier of specialty raw materials", "label": "a leading supplier of specialty raw materials", "shape": "dot"}, {"color": "#97c2fc", "id": "strategic locations", "label": "strategic locations", "shape": "dot"}, {"color": "#97c2fc", "id": "a full line of Solvent dyes", "label": "a full line of Solvent dyes", "shape": "dot"}, {"color": "#97c2fc", "id": "Sodium Nitrite", "label": "Sodium Nitrite", "shape": "dot"}, {"color": "#97c2fc", "id": "a major supplier of Basic dyes for the Textile Industry ,", "label": "a major supplier of Basic dyes for the Textile Industry ,", "shape": "dot"}, {"color": "#97c2fc", "id": "customized solutions for reductive bleaching of groundwood and recycled pulp", "label": "customized solutions for reductive bleaching of groundwood and recycled pulp", "shape": "dot"}, {"color": "#97c2fc", "id": "a full line of custom color concentrates ,", "label": "a full line of custom color concentrates ,", "shape": "dot"}, {"color": "#97c2fc", "id": "the leading global manufacturer of Vat dye liquids ,", "label": "the leading global manufacturer of Vat dye liquids ,", "shape": "dot"}, {"color": "#97c2fc", "id": "the Textile Industry", "label": "the Textile Industry", "shape": "dot"}, {"color": "#97c2fc", "id": "a full line of Vat dye liquids , Naphthol dyes and salts , and Reducing agents for use in the Textile Industry", "label": "a full line of Vat dye liquids , Naphthol dyes and salts , and Reducing agents for use in the Textile Industry", "shape": "dot"}, {"color": "#97c2fc", "id": "Basic dyes", "label": "Basic dyes", "shape": "dot"}, {"color": "#97c2fc", "id": "a superior quality Black Masterbatch", "label": "a superior quality Black Masterbatch", "shape": "dot"}, {"color": "#97c2fc", "id": "Black Masterbatch", "label": "Black Masterbatch", "shape": "dot"}, {"color": "#97c2fc", "id": "a 40 % Carbon Black loaded PP Black", "label": "a 40 % Carbon Black loaded PP Black", "shape": "dot"}, {"color": "#97c2fc", "id": "Royce International", "label": "Royce International", "shape": "dot"}, {"color": "#97c2fc", "id": "a variety of industries", "label": "a variety of industries", "shape": "dot"}, {"color": "#97c2fc", "id": "many industrial applications", "label": "many industrial applications", "shape": "dot"}, {"color": "#97c2fc", "id": "solvent - based ink systems", "label": "solvent - based ink systems", "shape": "dot"}, {"color": "#97c2fc", "id": "a main ingredient in molten salt baths", "label": "a main ingredient in molten salt baths", "shape": "dot"}, {"color": "#97c2fc", "id": "Sodium Nitrite \u0027s anti - corrosive properties", "label": "Sodium Nitrite \u0027s anti - corrosive properties", "shape": "dot"}, {"color": "#97c2fc", "id": "the production of recycled linerboard , newsprint , molded pulp products and unbleached kraft specialties", "label": "the production of recycled linerboard , newsprint , molded pulp products and unbleached kraft specialties", "shape": "dot"}, {"color": "#97c2fc", "id": "strict food - contact requirements", "label": "strict food - contact requirements", "shape": "dot"}, {"color": "#97c2fc", "id": "continuous dyeing and printing of high performance textiles", "label": "continuous dyeing and printing of high performance textiles", "shape": "dot"}, {"color": "#97c2fc", "id": "the most stringent requirements for both particle size and dispersion", "label": "the most stringent requirements for both particle size and dispersion", "shape": "dot"}, {"color": "#97c2fc", "id": "a 40 % Carbon Black loaded PP Black for Food Packaging applications", "label": "a 40 % Carbon Black loaded PP Black for Food Packaging applications", "shape": "dot"}, {"color": "#97c2fc", "id": "the strongest Black PP product in the market", "label": "the strongest Black PP product in the market", "shape": "dot"}, {"color": "#97c2fc", "id": "the best product", "label": "the best product", "shape": "dot"}, {"color": "#97c2fc", "id": "excellent gloss and no pitting", "label": "excellent gloss and no pitting", "shape": "dot"}, {"color": "#97c2fc", "id": "your thin wall film and fiber", "label": "your thin wall film and fiber", "shape": "dot"}, {"color": "#97c2fc", "id": "your thin wall film and fiber applications", "label": "your thin wall film and fiber applications", "shape": "dot"}, {"color": "#97c2fc", "id": "Royce \u0027s founder , Albert J. Royce , Sr . ,", "label": "Royce \u0027s founder , Albert J. Royce , Sr . ,", "shape": "dot"}, {"color": "#97c2fc", "id": "Royce", "label": "Royce", "shape": "dot"}, {"color": "#97c2fc", "id": "3 manufacturing facilities", "label": "3 manufacturing facilities", "shape": "dot"}, {"color": "#97c2fc", "id": "the production of Reductive Chemicals", "label": "the production of Reductive Chemicals", "shape": "dot"}, {"color": "#97c2fc", "id": "a Zinc Powder plant", "label": "a Zinc Powder plant", "shape": "dot"}, {"color": "#97c2fc", "id": "Passaic Color and Chemical", "label": "Passaic Color and Chemical", "shape": "dot"}, {"color": "#97c2fc", "id": "an Indigo Dispersion plant", "label": "an Indigo Dispersion plant", "shape": "dot"}, {"color": "#97c2fc", "id": "the Indigo business", "label": "the Indigo business", "shape": "dot"}, {"color": "#97c2fc", "id": "an office and technical center", "label": "an office and technical center", "shape": "dot"}, {"color": "#97c2fc", "id": "several new technologies", "label": "several new technologies", "shape": "dot"}, {"color": "#97c2fc", "id": "a patent for high performance reductive chemicals", "label": "a patent for high performance reductive chemicals", "shape": "dot"}, {"color": "#97c2fc", "id": "operations", "label": "operations", "shape": "dot"}, {"color": "#97c2fc", "id": "C.H. Patrick \u0026 Co. \u0027s Royce", "label": "C.H. Patrick \u0026 Co. \u0027s Royce", "shape": "dot"}, {"color": "#97c2fc", "id": "a new manufacturing plant in Gaffney , SC ,", "label": "a new manufacturing plant in Gaffney , SC ,", "shape": "dot"}, {"color": "#97c2fc", "id": "the efficacy of reductive bleaching of paper", "label": "the efficacy of reductive bleaching of paper", "shape": "dot"}, {"color": "#97c2fc", "id": "a joint - venture with Palmer International for the manufacture of Amine Curing Agents in Skippack ,", "label": "a joint - venture with Palmer International for the manufacture of Amine Curing Agents in Skippack ,", "shape": "dot"}, {"color": "#97c2fc", "id": "14 acres of land", "label": "14 acres of land", "shape": "dot"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "from": "Royce Global", "label": "prides", "to": "a 4th generation family - owned company"}, {"arrows": "to", "from": "Royce Global", "label": "have developed", "to": "products"}, {"arrows": "to", "from": "Royce Global", "label": "is", "to": "a leading supplier of colorants for the Textile Industry"}, {"arrows": "to", "from": "Royce Global", "label": "is", "to": "a leading supplier of specialty raw materials"}, {"arrows": "to", "from": "Royce Global", "label": "has", "to": "strategic locations"}, {"arrows": "to", "from": "Royce Global", "label": "supplies", "to": "a full line of Solvent dyes"}, {"arrows": "to", "from": "Royce Global", "label": "supplies", "to": "Sodium Nitrite"}, {"arrows": "to", "from": "Royce Global", "label": "is", "to": "a major supplier of Basic dyes for the Textile Industry ,"}, {"arrows": "to", "from": "Royce Global", "label": "offers", "to": "customized solutions for reductive bleaching of groundwood and recycled pulp"}, {"arrows": "to", "from": "Royce Global", "label": "offers", "to": "a full line of custom color concentrates ,"}, {"arrows": "to", "from": "Royce Global", "label": "is", "to": "the leading global manufacturer of Vat dye liquids ,"}, {"arrows": "to", "from": "Royce Global", "label": "has serviced", "to": "the Textile Industry"}, {"arrows": "to", "from": "Royce Global", "label": "offers", "to": "a full line of Vat dye liquids , Naphthol dyes and salts , and Reducing agents for use in the Textile Industry"}, {"arrows": "to", "from": "Royce Global", "label": "supplies", "to": "Basic dyes"}, {"arrows": "to", "from": "Royce Global", "label": "markets", "to": "a superior quality Black Masterbatch"}, {"arrows": "to", "from": "Royce Global", "label": "offers", "to": "Black Masterbatch"}, {"arrows": "to", "from": "Royce Global", "label": "offers", "to": "a 40 % Carbon Black loaded PP Black"}, {"arrows": "to", "from": "Royce Global", "label": "rebrands as", "to": "Royce International"}, {"arrows": "to", "from": "products", "label": "are used in", "to": "a variety of industries"}, {"arrows": "to", "from": "a leading supplier of specialty raw materials", "label": "used in", "to": "many industrial applications"}, {"arrows": "to", "from": "a full line of Solvent dyes", "label": "can be utilized in", "to": "solvent - based ink systems"}, {"arrows": "to", "from": "Sodium Nitrite", "label": "is used as", "to": "a main ingredient in molten salt baths"}, {"arrows": "to", "from": "Sodium Nitrite", "label": "is commonly used for", "to": "Sodium Nitrite \u0027s anti - corrosive properties"}, {"arrows": "to", "from": "Basic dyes", "label": "are commonly used in", "to": "the production of recycled linerboard , newsprint , molded pulp products and unbleached kraft specialties"}, {"arrows": "to", "from": "a full line of custom color concentrates ,", "label": "specially formulated to meet", "to": "strict food - contact requirements"}, {"arrows": "to", "from": "the leading global manufacturer of Vat dye liquids ,", "label": "primarily used in", "to": "continuous dyeing and printing of high performance textiles"}, {"arrows": "to", "from": "a superior quality Black Masterbatch", "label": "meets", "to": "the most stringent requirements for both particle size and dispersion"}, {"arrows": "to", "from": "a 40 % Carbon Black loaded PP Black for Food Packaging applications", "label": "is", "to": "the strongest Black PP product in the market"}, {"arrows": "to", "from": "a 40 % Carbon Black loaded PP Black for Food Packaging applications", "label": "is", "to": "the best product"}, {"arrows": "to", "from": "a 40 % Carbon Black loaded PP Black for Food Packaging applications", "label": "is fully dispersed and will exhibit", "to": "excellent gloss and no pitting"}, {"arrows": "to", "from": "the best product", "label": "to consider for", "to": "your thin wall film and fiber"}, {"arrows": "to", "from": "the best product", "label": "to consider for", "to": "your thin wall film and fiber applications"}, {"arrows": "to", "from": "Royce \u0027s founder , Albert J. Royce , Sr . ,", "label": "formed", "to": "Royce"}, {"arrows": "to", "from": "Royce", "label": "operate", "to": "3 manufacturing facilities"}, {"arrows": "to", "from": "Royce", "label": "has remained in", "to": "the production of Reductive Chemicals"}, {"arrows": "to", "from": "Royce", "label": "built", "to": "a Zinc Powder plant"}, {"arrows": "to", "from": "Royce", "label": "purchased", "to": "Passaic Color and Chemical"}, {"arrows": "to", "from": "Royce", "label": "built", "to": "an Indigo Dispersion plant"}, {"arrows": "to", "from": "Royce", "label": "expands", "to": "the Indigo business"}, {"arrows": "to", "from": "Royce", "label": "opens", "to": "an office and technical center"}, {"arrows": "to", "from": "Royce", "label": "introduces", "to": "several new technologies"}, {"arrows": "to", "from": "Royce", "label": "receives", "to": "a patent for high performance reductive chemicals"}, {"arrows": "to", "from": "Royce", "label": "expands", "to": "operations"}, {"arrows": "to", "from": "Royce", "label": "acquires", "to": "C.H. Patrick \u0026 Co. \u0027s Royce"}, {"arrows": "to", "from": "Royce", "label": "acquires", "to": "a new manufacturing plant in Gaffney , SC ,"}, {"arrows": "to", "from": "several new technologies", "label": "to improve", "to": "the efficacy of reductive bleaching of paper"}, {"arrows": "to", "from": "Royce International", "label": "forms", "to": "a joint - venture with Palmer International for the manufacture of Amine Curing Agents in Skippack ,"}, {"arrows": "to", "from": "a new manufacturing plant in Gaffney , SC ,", "label": "located on", "to": "14 acres of land"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "repulsion": {
+            "centralGravity": 0.2,
+            "damping": 0.09,
+            "nodeDistance": 500,
+            "springConstant": 0.05,
+            "springLength": 500
+        },
+        "solver": "repulsion",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
