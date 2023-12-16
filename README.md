@@ -1,7 +1,7 @@
 # NLP701-Project
 
 ## Notebooks 
-**1-BigQuery-GDELT.ipynb**: This notebook is used to query the GDELT database in BigQuery in order to obtain raw event data. Approximately $1000 was spent querying the database, so this data is proprietary.
+**1-BigQuery-GDELT.ipynb**: This notebook is used to query the GDELT database in BigQuery in order to obtain raw event data.
 
 **2-scrape-GDELT.ipynb**: This notebook is used to crawl through all the links featured in the event data queried from BigQuery.
 
