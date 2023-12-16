@@ -43,10 +43,17 @@ The files included are:
 ## Dependencies
 
 ! pip install -U torch
+
 ! pip install -U transformers
+
 ! pip install -U datasets
+
 ! pip install sentencepiece
+
 ! pip install transformers[torch]
+
 ! pip install numba
+
 ! pip install spacy
+
 ! pip install spacy-transformers
