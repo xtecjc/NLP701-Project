@@ -17,14 +17,14 @@
 
 **8-NER-extraction.ipynb**: This notebook extracts NERs from the subjects and objects in triples.
 
-**9-test-trained-models.ipynb**: Use this notebook to freely test the trained models
+**9-test-trained-models.ipynb**: Use this notebook to freely test the trained models. Download the models from the provided Google Drive link. The models in the repository have the same names as those in the notebook.
 
 **Exxon.html** - A sample network of RDF triples extracted using the triple parsing model
 
 **Royce.html** - A sample network of RDF triples extracted using the triple parsing model
 
 ## Datasets and Models
-The datasets used to train the token classification models, as well as the trained models are all contained in the following Google Drive Repository: https://drive.google.com/drive/folders/1YUGJwoRSQg0ukqSyafNzl_4CuVtwm_el?usp=drive_link
+The datasets and config files used to train the token classification models, as well as the trained models are all contained in the following Google Drive Repository: https://drive.google.com/drive/folders/1YUGJwoRSQg0ukqSyafNzl_4CuVtwm_el?usp=drive_link
 
 The files included are: 
 
